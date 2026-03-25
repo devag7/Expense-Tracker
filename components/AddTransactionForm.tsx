@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { addTransaction } from '@/lib/storage';
-import { Transaction, TransactionType, Category } from '@/lib/types';
+import { Transaction, TransactionType, Category, RecurringFrequency } from '@/lib/types';
 
 interface AddTransactionFormProps {
   onSuccess: () => void;
@@ -17,6 +17,7 @@ export default function AddTransactionForm({ onSuccess }: AddTransactionFormProp
   const [type, setType] = useState<TransactionType>('expense');
   const [category, setCategory] = useState<Category>('Food');
   const [date, setDate] = useState(today);
+  const [recurring, setRecurring] = useState<RecurringFrequency>('none');
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   function validate() {
@@ -42,6 +43,8 @@ export default function AddTransactionForm({ onSuccess }: AddTransactionFormProp
       type,
       category,
       date,
+      recurring,
+      lastGeneratedDate: date,
     };
     addTransaction(transaction);
     setDescription('');
@@ -49,28 +52,29 @@ export default function AddTransactionForm({ onSuccess }: AddTransactionFormProp
     setType('expense');
     setCategory('Food');
     setDate(today);
+    setRecurring('none');
     setErrors({});
     onSuccess();
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4">
-      <h2 className="text-xl font-semibold text-gray-800">Add Transaction</h2>
+    <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 p-6 space-y-4">
+      <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100">Add Transaction</h2>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Description</label>
         <input
           type="text"
           value={description}
           onChange={e => setDescription(e.target.value)}
           placeholder="e.g. Grocery shopping"
-          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          className="w-full border border-gray-300 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-100 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
         />
         {errors.description && <p className="text-red-500 text-xs mt-1">{errors.description}</p>}
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Amount ($)</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Amount ($)</label>
         <input
           type="number"
           min="0.01"
@@ -78,13 +82,13 @@ export default function AddTransactionForm({ onSuccess }: AddTransactionFormProp
           value={amount}
           onChange={e => setAmount(e.target.value)}
           placeholder="0.00"
-          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          className="w-full border border-gray-300 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-100 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
         />
         {errors.amount && <p className="text-red-500 text-xs mt-1">{errors.amount}</p>}
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Type</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Type</label>
         <div className="flex gap-4">
           {(['expense', 'income'] as TransactionType[]).map(t => (
             <label key={t} className="flex items-center gap-2 cursor-pointer">
@@ -105,11 +109,11 @@ export default function AddTransactionForm({ onSuccess }: AddTransactionFormProp
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Category</label>
         <select
           value={category}
           onChange={e => setCategory(e.target.value as Category)}
-          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          className="w-full border border-gray-300 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-100 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
         >
           {categories.map(c => (
             <option key={c} value={c}>{c}</option>
@@ -118,14 +122,27 @@ export default function AddTransactionForm({ onSuccess }: AddTransactionFormProp
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Date</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Date</label>
         <input
           type="date"
           value={date}
           onChange={e => setDate(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          className="w-full border border-gray-300 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-100 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
         />
         {errors.date && <p className="text-red-500 text-xs mt-1">{errors.date}</p>}
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">Recurring</label>
+        <select
+          value={recurring}
+          onChange={e => setRecurring(e.target.value as RecurringFrequency)}
+          className="w-full border border-gray-300 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-100 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        >
+          <option value="none">None</option>
+          <option value="weekly">Weekly</option>
+          <option value="monthly">Monthly</option>
+        </select>
       </div>
 
       <button

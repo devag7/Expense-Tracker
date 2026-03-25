@@ -21,16 +21,16 @@ export default function BalanceCard({ transactions }: BalanceCardProps) {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-        <p className="text-sm font-medium text-gray-500 mb-1">Total Income</p>
+      <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 p-6">
+        <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Total Income</p>
         <p className="text-2xl font-bold text-green-600">{formatCurrency(totalIncome)}</p>
       </div>
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-        <p className="text-sm font-medium text-gray-500 mb-1">Total Expenses</p>
+      <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 p-6">
+        <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Total Expenses</p>
         <p className="text-2xl font-bold text-red-500">{formatCurrency(totalExpense)}</p>
       </div>
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-        <p className="text-sm font-medium text-gray-500 mb-1">Net Balance</p>
+      <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 p-6">
+        <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Net Balance</p>
         <p className={`text-2xl font-bold ${netBalance >= 0 ? 'text-green-600' : 'text-red-500'}`}>
           {formatCurrency(netBalance)}
         </p>

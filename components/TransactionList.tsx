@@ -31,12 +31,12 @@ export default function TransactionList({ transactions, onDelete }: TransactionL
   const sorted = [...transactions].sort((a, b) => b.date.localeCompare(a.date));
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">Transactions</h2>
+    <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 p-6">
+      <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">Transactions</h2>
       {sorted.length === 0 ? (
-        <p className="text-gray-400 text-sm text-center py-8">No transactions found.</p>
+        <p className="text-gray-400 dark:text-gray-500 text-sm text-center py-8">No transactions found.</p>
       ) : (
-        <ul className="divide-y divide-gray-100">
+        <ul className="divide-y divide-gray-100 dark:divide-gray-800">
           {sorted.map(t => (
             <li key={t.id} className="flex items-center justify-between py-3 gap-3">
               <div className="flex items-center gap-3 min-w-0">
@@ -45,8 +45,8 @@ export default function TransactionList({ transactions, onDelete }: TransactionL
                   style={{ backgroundColor: CATEGORY_COLORS[t.category] ?? '#64748b' }}
                 />
                 <div className="min-w-0">
-                  <p className="text-sm font-medium text-gray-800 truncate">{t.description}</p>
-                  <p className="text-xs text-gray-400">{formatDate(t.date)}</p>
+                  <p className="text-sm font-medium text-gray-800 dark:text-gray-100 truncate">{t.description}</p>
+                  <p className="text-xs text-gray-400 dark:text-gray-500">{formatDate(t.date)}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 flex-shrink-0">

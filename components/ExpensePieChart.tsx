@@ -26,10 +26,10 @@ export default function ExpensePieChart({ transactions }: ExpensePieChartProps) 
   const data = Object.entries(grouped).map(([name, value]) => ({ name, value }));
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">Expense Breakdown</h2>
+    <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 p-6">
+      <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">Expense Breakdown</h2>
       {data.length === 0 ? (
-        <p className="text-gray-400 text-sm text-center py-12">No expense data to display.</p>
+        <p className="text-gray-400 dark:text-gray-500 text-sm text-center py-12">No expense data to display.</p>
       ) : (
         <ResponsiveContainer width="100%" height={280}>
           <PieChart>

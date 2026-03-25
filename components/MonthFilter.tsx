@@ -39,11 +39,11 @@ export default function MonthFilter({ selected, onChange }: MonthFilterProps) {
 
   return (
     <div className="flex items-center gap-3">
-      <label className="text-sm font-medium text-gray-600">Filter by month:</label>
+      <label className="text-sm font-medium text-gray-600 dark:text-gray-300">Filter by month:</label>
       <select
         value={value}
         onChange={handleChange}
-        className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white"
+        className="border border-gray-300 dark:border-gray-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white dark:bg-gray-900 dark:text-gray-100"
       >
         <option value="all">All Time</option>
         {options.map(o => (
