@@ -1,6 +1,6 @@
 # Expense Tracker
 
-A full-featured Expense Tracker built with [Next.js 14](https://nextjs.org) (App Router), TypeScript, Tailwind CSS, and Recharts.
+A full-featured Expense Tracker built with [Next.js 15](https://nextjs.org) (App Router), TypeScript, Tailwind CSS, and Recharts.
 
 ## Features
 
@@ -23,7 +23,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Tech Stack
 
-- **Next.js 14** – App Router, React Server / Client Components
+- **Next.js 15** – App Router, React Server / Client Components
 - **TypeScript** – strict typing throughout
 - **Tailwind CSS** – utility-first styling
 - **Recharts** – pie chart for expense breakdown

@@ -4,6 +4,7 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'Expense Tracker',
   description: 'Track your income and expenses effortlessly',
+  icons: { icon: '/favicon.ico' },
 };
 
 export default function RootLayout({
