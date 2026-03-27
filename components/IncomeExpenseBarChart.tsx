@@ -52,7 +52,7 @@ export default function IncomeExpenseBarChart({ transactions }: IncomeExpenseBar
         <BarChart data={data}>
           <XAxis dataKey="month" tick={{ fontSize: 12 }} />
           <YAxis tick={{ fontSize: 12 }} />
-          <Tooltip formatter={(value) => `$${Number(value ?? 0).toFixed(2)}`} />
+          <Tooltip formatter={(value) => `₹${Number(value ?? 0).toFixed(2)}`} />
           <Legend />
           <Bar dataKey="income" fill="#16a34a" radius={[4, 4, 0, 0]} />
           <Bar dataKey="expense" fill="#ef4444" radius={[4, 4, 0, 0]} />
