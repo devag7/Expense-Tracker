@@ -53,7 +53,7 @@ export default function BudgetLimitsCard({ budgetLimits, onChange, transactions 
                 className="w-full border border-gray-300 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-100 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
               />
               <div className="text-right min-w-28">
-                <p className="text-xs text-gray-500 dark:text-gray-400">${spent.toFixed(2)} spent</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">₹{spent.toFixed(2)} spent</p>
                 {limit ? (
                   <span
                     className={`inline-flex mt-1 text-[11px] px-2 py-0.5 rounded-full font-medium ${

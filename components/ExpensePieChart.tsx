@@ -49,7 +49,7 @@ export default function ExpensePieChart({ transactions }: ExpensePieChartProps) 
                 />
               ))}
             </Pie>
-            <Tooltip formatter={(value) => `$${Number(value ?? 0).toFixed(2)}`} />
+            <Tooltip formatter={(value) => `₹${Number(value ?? 0).toFixed(2)}`} />
             <Legend />
           </PieChart>
         </ResponsiveContainer>
